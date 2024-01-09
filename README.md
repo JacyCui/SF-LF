@@ -26,10 +26,10 @@ This repository consists of two parts:
 |                `transitivity y`                 | prove a goal `x = z` by proving two new subgoals, `x = y` and `y = z` |
 |                    `unfold`                     | replace a defined constant by its right-hand side in the goal |
 |                `unfold ... in H`                | replace a defined constant by its right-hand side in a hypothesis |
-|              `destruct ... as ...`              | case analysis on values of inductively defined types or logic connectives<br />or<br />destruct an existential hypothesis into its witness and proposition |
+|              `destruct ... as ...`              | case analysis on values of inductively defined<br /> types, propositions or logic connectives<br />or<br />destruct an existential hypothesis into its witness and proposition |
 |             `destruct ... eqn: ...`             | specify the name of an equation to be added to the context,<br />recording the result of the case analysis |
 |   `destruct H`<br />where<br />`H` is `False`   |        finish the proof when a hypothesis is `False`         |
-|             `induction ... as ...`              |       induction on values of inductively defined types       |
+|             `induction ... as ...`              | induction on values of inductively defined types or propositions |
 |             `injection ... as ...`              | reason by injectivity on equalities between values of inductively defined types |
 |                 `discriminate`                  | reason by disjointness of constructors on equalities between values of inductively defined types |
 | `assert (H: e)`<br />or<br /> `assert (e) as H` |        introduce a "local lemma" `e` and call it `H`         |
@@ -40,9 +40,8 @@ This repository consists of two parts:
 |                     `right`                     |        change a goal of the form `g \/ g2` into `g2`         |
 |                    `exfalso`                    |                  change the goal to `False`                  |
 |                  `exists ...`                   |      choose a witness for an existential qualified goal      |
-|                                                 |                                                              |
-
-
+|             `inversion ... as ...`              | reason about all the different ways a inductively defined stuff<br /> could have been derived (doing work of `destruct`, `injection` and `discriminate`) |
+|           `remember e as x eqn: ...`            | replace all occurrences of the expression `e` by the variable `x` <br />and<br />add an equation `x = e` to the context |
 
 
 
