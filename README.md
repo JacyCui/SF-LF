@@ -51,6 +51,12 @@ This repository consists of two parts:
 |                  `assumption`                   | Try to find a hypothesis `H` in the context that<br />exactly matches the goal; if one is found, solve the goal. |
 |                 `contradiction`                 | Try to find a hypothesis `H` in the context that is logically equivalent to `False`.  <br />If one is found, solve the goal. |
 |                  `constructor`                  | Try to find a constructor `c` (from some `Inductive` definition in the current environment) <br />that can be applied to solve the current goal.<br />If one is found, behave like `apply c` . |
+|                     `auto`                      | Solve goals that are solvable by any combination of `intros` and<br /> `apply` of hypotheses from the local context (by default). |
+|              `auto ... using ...`               | Extend the hint database just for the purposes of one application of `auto`. |
+|                  `congruence`                   | Finish the proof when you can finish the proof using `rewrite` and `discrimination`. |
+|                   `eapply H`                    | Behave like `apply`, except delay of instantiation of quantifiers. |
+|                  `eassumption`                  | Solves the goal if one of the premises matches the goal<br />up to instantiations of existential variables. |
+|                     `eauto`                     | Work like `auto` except that it uses `eapply` and `eassumption`. |
 
 ### Tips
 
@@ -66,6 +72,19 @@ This repository consists of two parts:
         then invoking `lia` will either solve the goal or fail, meaning that the goal is actually false.  
 
     - If the goal is not of this form, `lia` will fail.
+
+- About `auto` :
+
+    - We can use `debug auto` to see where `auto` gets stuck.
+    - If we want to see which facts `auto` is using, we can use `info_auto` instead.
+    - `Hint Resolve T : core.` adds the assumption `T` to global hint database `core`.
+    - `Hint Constructors c : core.` is a shorthand to do a `Hint Resolve` for all of the constructors from the inductive definition of `c`.
+    - `Hint Unfold d : core.` so that `auto` knows to expand uses of `d`.
+    - `Hint Transparent d: core.` so that `auto` knows definition of `d`.
+
+- `info_eauto` shows us which tactics `eauto` uses in its proof search.
+
+- `Proof with t` (where `t` is an arbitrary tactic) allows us to use `t1...` as a shorthand for `t1;t` within the proof.
 
 
 
