@@ -231,6 +231,7 @@ Hint Unfold is_fortytwo : core.
 Example auto_example_7' : forall x,
   (x <= 42 /\ 42 <= x) -> is_fortytwo x.
 Proof.
+  (* info_auto. *)
   auto. (* try also: info_auto. *)
 Qed.
 
