@@ -1,6 +1,6 @@
 # Software Foundations - Volumn 1 : Logical Foundations
 
-This repository consists of two parts:
+This repository consists of three parts:
 
 - All coq files from [Online Logic Foundations Textbook](https://softwarefoundations.cis.upenn.edu/lf-current/index.html) (version 6.5) with solutions for all formal exercises.
 - A summary of proof tactics for quick reference.
