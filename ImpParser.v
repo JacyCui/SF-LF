@@ -462,4 +462,6 @@ Example eg2 : parse "
       "x" := "z" }>.
 Proof. cbv. reflexivity. Qed.
 
+(* Finish Learning. *)
+
 (* 2023-08-23 13:50 *)
