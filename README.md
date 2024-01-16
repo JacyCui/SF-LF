@@ -58,6 +58,7 @@ This repository consists of three parts:
 |                   `eapply H`                    | Behave like `apply`, except delay of instantiation of quantifiers. |
 |                  `eassumption`                  | Solves the goal if one of the premises matches the goal<br />up to instantiations of existential variables. |
 |                     `eauto`                     | Work like `auto` except that it uses `eapply` and `eassumption`. |
+|                      `cbv`                      |          Call by value, reduce to beta-normal form.          |
 
 ### Tips
 
