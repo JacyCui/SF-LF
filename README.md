@@ -31,6 +31,7 @@ This repository consists of three parts:
 |             `destruct ... eqn: ...`             | Specify the name of an equation to be added to the context,<br />recording the result of the case analysis. |
 |   `destruct H`<br />where<br />`H` is `False`   |       Finish the proof when a hypothesis is `False` .        |
 |             `induction ... as ...`              | Induction on values of inductively defined types or propositions. |
+|            `induction ... using ...`            |         Utilize a non-standard induction principle.          |
 |             `injection ... as ...`              | Reason by injectivity on equalities between values of inductively defined types. |
 |                 `discriminate`                  | Reason by disjointness of constructors on equalities between values of inductively defined types. |
 | `assert (H: e)`<br />or<br /> `assert (e) as H` |       Introduce a "local lemma" `e` and call it `H` .        |
