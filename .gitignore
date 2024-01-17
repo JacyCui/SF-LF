@@ -3,3 +3,7 @@
 *.aux
 *.glob
 *.cache
+imp*.ml*
+*.cmi
+*.cmo
+impdriver
