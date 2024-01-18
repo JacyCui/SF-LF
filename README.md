@@ -66,6 +66,7 @@ This repository consists of three parts:
 |                     `eauto`                     | Work like `auto` except that it uses `eapply` and `eassumption`. |
 |                      `cbv`                      |          Call by value, reduce to beta-normal form.          |
 |                     `idtac`                     | Identity tactic that always succeeds without changing the proof state. |
+|               `extensionality x`                |       Use functional extentionality with variable `x`.       |
 
 ### Tips
 
