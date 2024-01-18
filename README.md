@@ -44,21 +44,28 @@ This repository consists of three parts:
 |                  `exists ...`                   |     Choose a witness for an existential qualified goal.      |
 |             `inversion ... as ...`              | Reason about all the different ways a inductively defined stuff<br /> could have been derived (doing work of `destruct`, `injection` and `discriminate`). |
 |           `remember e as x eqn: ...`            | Replace all occurrences of the expression `e` by the variable `x` <br />and<br />add an equation `x = e` to the context. |
-|                      `lia`                      | The `lia` tactic implements a decision procedure for integer linear arithmetic, <br />a subset of propositional logic and arithmetic. |
 |                    `clear H`                    |           Delete hypothesis `H` from the context.            |
 |                    `subst x`                    | Given a variable `x`, find an assumption `x = e` or `e = x` in the context,<br />replace `x` with `e` throughout the context and current goal, and clear the assumption. |
 |                     `subst`                     | Substitute away all assumptions of the form `x = e` or `e = x` (where `x` is a variable). |
 |              `rename ... into ...`              | Change the name of a hypothesis in the proof context<br />For example, if the context includes a variable named `x` , <br />then `rename x into y` will change all occurrences of `x` to `y`. |
 |                  `assumption`                   | Try to find a hypothesis `H` in the context that<br />exactly matches the goal; if one is found, solve the goal. |
-|                 `contradiction`                 | Try to find a hypothesis `H` in the context that is logically equivalent to `False`.  <br />If one is found, solve the goal. |
+|                 `contradiction`                 | Handle some ad hoc situations where a hypotheses is equivlent to `False`<br />or two hypotheses derive `False`. |
 |                  `constructor`                  | Try to find a constructor `c` (from some `Inductive` definition in the current environment) <br />that can be applied to solve the current goal.<br />If one is found, behave like `apply c` . |
-|                     `auto`                      | Solve goals that are solvable by any combination of `intros` and<br /> `apply` of hypotheses from the local context (by default). |
+|                     `auto`                      | Solve goals that are solvable by any combination of `intros` and<br /> `apply` of hypotheses from the local context and `core` hint database. |
+|                 `auto with db`                  |             Additionally using hints from `db`.              |
+|                    `auto N`                     |            Search with depth `N` (default is 5).             |
 |              `auto ... using ...`               | Extend the hint database just for the purposes of one application of `auto`. |
-|                  `congruence`                   | Finish the proof when you can finish the proof using `rewrite` and `discrimination`. |
+|                      `lia`                      | The `lia` tactic implements a decision procedure for integer linear arithmetic, <br />a subset of propositional logic and arithmetic. |
+|                     `ring`                      |   Solve equations over the algebraic structures of rings.    |
+|                     `field`                     |   Solve equations over the algebraic structures of fields.   |
+|                  `congruence`                   | A decision procedure for equality with uninterpreted functions and other symbols. |
+|                   `intuition`                   | Implement a decision procedure for propositional tautologies in  Coq's constructive logic. |
+|                  `intuition T`                  | Apply `T` to all the unsolved goals that `intuition` generates. |
 |                   `eapply H`                    | Behave like `apply`, except delay of instantiation of quantifiers. |
 |                  `eassumption`                  | Solves the goal if one of the premises matches the goal<br />up to instantiations of existential variables. |
 |                     `eauto`                     | Work like `auto` except that it uses `eapply` and `eassumption`. |
 |                      `cbv`                      |          Call by value, reduce to beta-normal form.          |
+|                     `idtac`                     | Identity tactic that always succeeds without changing the proof state. |
 
 ### Tips
 
@@ -75,18 +82,27 @@ This repository consists of three parts:
 
     - If the goal is not of this form, `lia` will fail.
 
+    - For non-linear goals, `lia` will also either solve the goal or fail. But in this case, the failure does not necessarily mean that the goal is invalid -- it might just be beyond `lia`'s reach to prove because of non-linearity.
+
 - About `auto` :
 
     - We can use `debug auto` to see where `auto` gets stuck.
     - If we want to see which facts `auto` is using, we can use `info_auto` instead.
-    - `Hint Resolve T : core.` adds the assumption `T` to global hint database `core`.
-    - `Hint Constructors c : core.` is a shorthand to do a `Hint Resolve` for all of the constructors from the inductive definition of `c`.
-    - `Hint Unfold d : core.` so that `auto` knows to expand uses of `d`.
-    - `Hint Transparent d: core.` so that `auto` knows definition of `d`.
+    - `Create HintDb db.` creates a custom hint database named `db` aside from the global hint database `core`.
+    - `Hint Resolve T : db.` adds the assumption `T` to database `db`.
+    - `Hint Constructors c : db.` is a shorthand to do a `Hint Resolve` for all of the constructors from the inductive definition of `c`.
+    - `Hint Unfold d : db.` so that `auto with db` (`core` is used by default) knows to expand uses of `d`. 
+    - `Hint Transparent d: db.` so that `auto with db` (`core` is used by default) knows definition of `d`.
+    - Technically creation of the database is optional; Coq will create it automatically the first time we use `Hint`.
+    - Many of the important libraries have their own hint databases that you can tag in: `arith`, `bool`, `datatypes` (including lists), etc.R
 
 - `info_eauto` shows us which tactics `eauto` uses in its proof search.
 
 - `Proof with t` (where `t` is an arbitrary tactic) allows us to use `t1...` as a shorthand for `t1;t` within the proof.
+
+- If more than one constructor can apply, `constructor` picks the first one, in the order in which they were defined in the `Inductive` definition. That might not be the one you want.
+
+- The `congruence` tactic is able to work with constructors, even taking advantage of their injectivity and distinctness.
 
 
 
