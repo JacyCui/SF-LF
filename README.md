@@ -14,6 +14,7 @@ This repository consists of three parts:
 | :---------------------------------------------: | :----------------------------------------------------------: |
 |                    `intros`                     |      Move hypotheses / variables from goal to context.       |
 |                  `reflexivity`                  | Finish the proof (when the goal looks like `e = e` or `e <-> e`). |
+|             `replace (t) with (u)`              | Replace (all copies of) expression `t` in the goal by expression `u`, <br />and generates `t = u` as an additional subgoal. |
 |                     `apply`                     |    Prove goal using a hypothesis, lemma, or constructor.     |
 |                `apply ... in H`                 | Apply a hypothesis, lemma, or constructor to a hypothesis in the context (forward reasoning). |
 |              `apply ... with ...`               | Explicitly specify values for variables that cannot be determined by pattern matching<br />(you can also do this by using a theorem as a function and it's possible to use wildcards). |
