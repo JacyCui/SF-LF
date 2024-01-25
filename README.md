@@ -6,6 +6,8 @@ This repository consists of three parts:
 - A summary of proof tactics for quick reference.
 - A summary of tacticals for quick reference.
 
+> You can move forward to [Programming Language Foundations](https://github.com/JacyCui/SF-LF) after completing Logical Foundations.
+
 
 
 ## Proof Tactics Summary
