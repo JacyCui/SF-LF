@@ -7,3 +7,4 @@ imp*.ml*
 *.cmi
 *.cmo
 impdriver
+*Makefile.*
