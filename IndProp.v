@@ -3131,9 +3131,7 @@ Fixpoint regex_match (s : string) (re : reg_exp ascii) : bool :=
 Theorem regex_match_correct : matches_regex regex_match.
 Proof.
   unfold matches_regex. induction s as [| a s' IH].
-  - intros re. simpl. destruct (match_eps_refl re) as [H | H].
-    + apply ReflectT. apply H.
-    + apply ReflectF. apply H.
+  - intros re. simpl. apply match_eps_refl.
   - intros re. simpl. destruct (IH (derive a re)) as [H | H].
     + apply ReflectT. apply (derive_corr a re s'). apply H.
     + apply ReflectF. rewrite (derive_corr a re s'). apply H.
