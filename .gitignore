@@ -8,3 +8,4 @@ imp*.ml*
 *.cmo
 impdriver
 *Makefile.*
+.Makefile.coq.d
